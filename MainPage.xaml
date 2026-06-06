@@ -1,0 +1,64 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PasswordResetBruteForce_GUI.MainPage"
+             Title="Password Reset Brute Force">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="25" Spacing="15">
+
+            <Label Text="Password Reset Brute Force"
+                   FontSize="26"
+                   FontAttributes="Bold"
+                   HorizontalOptions="Center" />
+
+            <Button Text="Create Random Password"
+                    Clicked="OnCreatePasswordClicked" />
+
+            <Label Text="Created Password:" FontAttributes="Bold" />
+            <Label x:Name="CreatedPasswordLabel"
+                   Text="Not created yet" />
+
+            <Label Text="SHA256 Hash:" FontAttributes="Bold" />
+            <Label x:Name="HashLabel"
+                   Text="No hash yet"
+                   LineBreakMode="WordWrap" />
+
+            <HorizontalStackLayout Spacing="10">
+                <Button Text="Start Single-Thread"
+                        Clicked="OnStartSingleThreadClicked" />
+
+                <Button Text="Start Multi-Thread"
+                        Clicked="OnStartMultiThreadClicked" />
+
+                <Button Text="Stop"
+                        Clicked="OnStopClicked" />
+            </HorizontalStackLayout>
+
+            <Label Text="Progress:" FontAttributes="Bold" />
+            <ProgressBar x:Name="AttackProgressBar"
+                         Progress="0" />
+
+            <Label x:Name="ProgressLabel"
+                   Text="0%" />
+
+            <Label Text="Attempts:" FontAttributes="Bold" />
+            <Label x:Name="AttemptsLabel"
+                   Text="0" />
+
+            <Label Text="Elapsed Time:" FontAttributes="Bold" />
+            <Label x:Name="ElapsedTimeLabel"
+                   Text="0 seconds" />
+
+            <Label Text="Found Password:" FontAttributes="Bold" />
+            <Label x:Name="FoundPasswordLabel"
+                   Text="Not found yet"
+                   FontSize="20" />
+
+            <Label Text="Performance Log:" FontAttributes="Bold" />
+            <Editor x:Name="LogEditor"
+                    HeightRequest="180"
+                    IsReadOnly="True" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
