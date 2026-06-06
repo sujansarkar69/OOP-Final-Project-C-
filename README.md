@@ -18,9 +18,24 @@ This project is an Object-Oriented Programming final task developed using .NET M
 ## Version History
 
 ### Version 1
-Created the .NET MAUI project structure and implemented the main application files.
+Created the .NET MAUI project structure.
 
 ### Version 2
+Added password generation and SHA256 hashing.
+
+### Version 3
+Added brute force generator and password validator.
+
+### Version 4
+Added single-thread brute force functionality.
+
+### Version 5
+Added multi-thread brute force using Task-based parallel execution.
+
+### Version 6
+Added GUI controls, progress display, elapsed time display, and found password output.
+
+### Version 7
 Added README file with project description, features, version history, and educational purpose.
 
 ## Educational Purpose
