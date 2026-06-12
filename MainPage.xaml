@@ -23,6 +23,17 @@
                    Text="No hash yet"
                    LineBreakMode="WordWrap" />
 
+            <Label Text="Thread Count:" FontAttributes="Bold" />
+
+            <Slider x:Name="ThreadSlider"
+                    Minimum="1"
+                    Maximum="1"
+                    Value="1"
+                    ValueChanged="OnThreadSliderValueChanged" />
+
+            <Label x:Name="ThreadCountLabel"
+                   Text="Threads: 1" />
+
             <HorizontalStackLayout Spacing="10">
                 <Button Text="Start Single-Thread"
                         Clicked="OnStartSingleThreadClicked" />

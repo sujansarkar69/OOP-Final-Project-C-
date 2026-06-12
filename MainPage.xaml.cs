@@ -21,6 +21,8 @@ public partial class MainPage : ContentPage
     private Stopwatch? _uiStopwatch;
     private IDispatcherTimer? _timer;
 
+    private int _selectedThreadCount = 1;
+
     private const int MaxLength = 6;
 
     public MainPage()
@@ -36,6 +38,7 @@ public partial class MainPage : ContentPage
         _performanceLogger = new PerformanceLogger();
 
         SetupTimer();
+        SetupThreadSlider();
     }
 
     private void SetupTimer()
@@ -50,6 +53,27 @@ public partial class MainPage : ContentPage
                 ElapsedTimeLabel.Text = $"{_uiStopwatch.Elapsed.TotalSeconds:F2} seconds";
             }
         };
+    }
+
+    private void SetupThreadSlider()
+    {
+        int maxThreads = Math.Max(1, Environment.ProcessorCount);
+
+        ThreadSlider.Minimum = 1;
+        ThreadSlider.Maximum = maxThreads;
+        ThreadSlider.Value = Math.Max(1, maxThreads - 1);
+
+        _selectedThreadCount = (int)Math.Round(ThreadSlider.Value);
+        ThreadCountLabel.Text = $"Threads: {_selectedThreadCount} / Max CPU: {maxThreads}";
+    }
+
+    private void OnThreadSliderValueChanged(object? sender, ValueChangedEventArgs e)
+    {
+        _selectedThreadCount = (int)Math.Round(e.NewValue);
+        ThreadSlider.Value = _selectedThreadCount;
+
+        int maxThreads = Math.Max(1, Environment.ProcessorCount);
+        ThreadCountLabel.Text = $"Threads: {_selectedThreadCount} / Max CPU: {maxThreads}";
     }
 
     private void OnCreatePasswordClicked(object? sender, EventArgs e)
@@ -86,7 +110,7 @@ public partial class MainPage : ContentPage
             return;
         }
 
-        await StartAttackAsync("Multi-thread");
+        await StartAttackAsync($"Multi-thread ({_selectedThreadCount} threads)");
     }
 
     private async Task StartAttackAsync(string attackType)
@@ -111,7 +135,7 @@ public partial class MainPage : ContentPage
 
         AttackResult result;
 
-        if (attackType == "Single-thread")
+        if (attackType.StartsWith("Single-thread"))
         {
             result = await _singleThreadBruteForcer.StartAsync(
                 _targetHash,
@@ -125,6 +149,7 @@ public partial class MainPage : ContentPage
             result = await _multiThreadBruteForcer.StartAsync(
                 _targetHash,
                 MaxLength,
+                _selectedThreadCount,
                 progress,
                 attemptsProgress,
                 _cancellationTokenSource.Token);

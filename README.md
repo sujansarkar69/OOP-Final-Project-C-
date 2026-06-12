@@ -8,7 +8,9 @@ This project is an Object-Oriented Programming final task developed using .NET M
 - SHA256 password hashing with static salt
 - Brute force search from length 1 to 6
 - Single-thread brute force
-- Multi-thread brute force using CPU cores - 1
+- Multi-thread brute force using Task-based parallel execution
+- Dynamic thread selection using a GUI slider
+- Thread count selection from 1 to maximum available CPU count
 - Start and stop buttons
 - Progress indicator
 - Elapsed time display
@@ -37,6 +39,12 @@ Added GUI controls, progress display, elapsed time display, and found password o
 
 ### Version 7
 Added README file with project description, features, version history, and educational purpose.
+
+### Version 8
+Updated README version history.
+
+### Version 9
+Added a GUI Slider to dynamically select the number of threads from 1 to the maximum available CPU count. The multi-thread brute-force method now uses the selected slider value instead of a hardcoded thread count.
 
 ## Educational Purpose
 This application is created for educational purposes only. It demonstrates password hashing and brute force concepts locally within the application.

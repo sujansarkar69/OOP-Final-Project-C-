@@ -17,6 +17,7 @@ public class MultiThreadBruteForcer
     public async Task<AttackResult> StartAsync(
         string targetHash,
         int maxLength,
+        int threadCount,
         IProgress<double> progress,
         IProgress<long> attemptsProgress,
         CancellationToken cancellationToken)
@@ -29,7 +30,8 @@ public class MultiThreadBruteForcer
         string foundPassword = "";
         bool isFound = false;
 
-        int threadCount = Math.Max(1, Environment.ProcessorCount - 1);
+        int maxThreads = Math.Max(1, Environment.ProcessorCount);
+        threadCount = Math.Clamp(threadCount, 1, maxThreads);
 
         using CancellationTokenSource linkedCts =
             CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
